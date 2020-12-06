@@ -35,3 +35,16 @@ exports.show_add_user_form = (req, res) => {
       
     }
   }
+
+  exports.delete_user = async (req,res) => {
+    
+    try {
+      await UserModel.destroy({
+        where : {
+          id : req.params.id,
+        }
+      })
+    } catch (error) {
+      
+    }
+  }

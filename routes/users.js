@@ -13,4 +13,5 @@ router.get("/add", usersController.show_add_user_form);
 
 router.post("/add", usersController.add_user);
 //bana gelen formu add_user ile post ederim;
+router.get("/:id/delete", usersController.delete_user)
 module.exports = router;
