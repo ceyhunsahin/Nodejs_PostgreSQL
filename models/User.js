@@ -52,6 +52,8 @@ const UserModel = sequelize.define(
   },
   {
     //options
+    // freezeTebleName = true dersek tablo 
+    //ismini istedigimiz gibi kullanabiliriz
   }
 );
 

@@ -5,6 +5,12 @@ const usersController = require("../controllers/usersController");
 /*  /user */
 
 router.get("/", usersController.get_users);
-router.get("/add", usersController.add_users);
 
+
+
+router.get("/add", usersController.show_add_user_form);
+
+
+router.post("/add", usersController.add_user);
+//bana gelen formu add_user ile post ederim;
 module.exports = router;
