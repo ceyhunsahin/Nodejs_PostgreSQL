@@ -4,36 +4,50 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+//const sequelize = require("sequelize")
+require("dotenv").config();
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+
+
+
 var app = express();
+
+
+const { Sequelize } = require('sequelize');
+// connect to db
+/* const sequelize = new Sequelize(
+  'postgres://username:pass@example.com:5432/dbname') 
+  // Example for postgres
+  DB_USERNAME
+  DB_PASSWORD
+  DB_HOSTNAME
+  DB_PORT
+  DB_NAME*/
+
+const  { DB_USERNAME, DB_PASSWORD, DB_HOSTNAME, DB_PORT, DB_NAME } = process.env
+
+const sequelize = new Sequelize(`postgres://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOSTNAME}:${DB_PORT}/${DB_NAME}`);
+
+
+sequelize
+.authenticate()
+.then(() => console.log("succesfully connected to db"))
+.catch((err) => console.log("uanbled connected to db",err))
+.finally()
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-//MVC
-// Model -PostgreSQL
-//View -- Ejs template
-//Controller -- kendimiz yazacaz
-
-//RESTful API front end ile backend bunun uzerinden konusur
-
-//users API
-
-//CRUD  db ye giris islemleri, once serverdan bi API hazirlamak lazim
-//CREATE -- add user
-
-//READ --listuser
-//UPDATE -- edit user
-//DELETE -- delete user
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
