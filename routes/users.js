@@ -5,5 +5,6 @@ const usersController = require("../controllers/usersController");
 /*  /user */
 
 router.get("/", usersController.get_users);
+router.get("/add", usersController.add_users);
 
 module.exports = router;
